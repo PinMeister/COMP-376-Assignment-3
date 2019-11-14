@@ -6,14 +6,14 @@ public class Player : MonoBehaviour
     [SerializeField]    float moveSpeed = 3;
     [SerializeField]    float swimForce = 50;
     [SerializeField]    float positionOffset = 0;
-    [SerializeField]    Sprite playerFull;
+    /*[SerializeField]    Sprite playerFull;
     [SerializeField]    Sprite playerHit;
     [SerializeField]    Sprite playerDead;
     [SerializeField]    Sprite specialFull;
     [SerializeField]    Sprite specialHit;
-    [SerializeField]    Sprite specialDead;
+    [SerializeField]    Sprite specialDead;*/
 
-    Rigidbody2D submarine;
+    Rigidbody submarine;
     GameObject gold;
     GameObject boost;
     GameSpawner gameSpawnerVariable;
@@ -31,7 +31,7 @@ public class Player : MonoBehaviour
 
     void Start()
     {
-        submarine = GetComponent<Rigidbody2D>();
+        submarine = GetComponent<Rigidbody>();
         gameSpawnerVariable = GameObject.Find("GameSpawner").GetComponent<GameSpawner>();
         leftBoundary = GameObject.Find("LeftBoundary").transform;
         rightBoundary = GameObject.Find("RightBoundary").transform;
@@ -80,7 +80,7 @@ public class Player : MonoBehaviour
             submarine.GetComponent<Rigidbody2D>().gravityScale = 0.2f;
         }
 
-        if (tanks == 2)
+        /*if (tanks == 2)
         {
             if (boostActive == true)
             {
@@ -138,7 +138,7 @@ public class Player : MonoBehaviour
                 boostHeld = false;
                 gameSpawnerVariable.boostPresent = false;
             }
-        }
+        }*/
 
         if (Input.GetKey(KeyCode.LeftShift) && boostHeld == true && gameSpawnerVariable.special == true)
         {
