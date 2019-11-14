@@ -1,0 +1,55 @@
+This project uses the following items from Poly (http://poly.google.com):
+
+Title: Boat
+Author: Poly by Google
+URL: https://poly.google.com/view/84-DYhLzxNq
+License: Creative Commons CC-BY
+https://creativecommons.org/licenses/by/3.0/legalcode
+
+Title: Coins
+Author: Poly by Google
+URL: https://poly.google.com/view/fNCwo0rGrqD
+License: Creative Commons CC-BY
+https://creativecommons.org/licenses/by/3.0/legalcode
+
+Title: Gold
+Author: Poly by Google
+URL: https://poly.google.com/view/0w-WpQf7O9J
+License: Creative Commons CC-BY
+https://creativecommons.org/licenses/by/3.0/legalcode
+
+Title: Kelp
+Author: Poly by Google
+URL: https://poly.google.com/view/4cFllH6Iazk
+License: Creative Commons CC-BY
+https://creativecommons.org/licenses/by/3.0/legalcode
+
+Title: Ocean
+Author: Poly by Google
+URL: https://poly.google.com/view/faUostvShTI
+License: Creative Commons CC-BY
+https://creativecommons.org/licenses/by/3.0/legalcode
+
+Title: Octopus
+Author: Poly by Google
+URL: https://poly.google.com/view/flkOBUVpPHg
+License: Creative Commons CC-BY
+https://creativecommons.org/licenses/by/3.0/legalcode
+
+Title: Shark
+Author: Poly by Google
+URL: https://poly.google.com/view/8Ke5qCnWxsZ
+License: Creative Commons CC-BY
+https://creativecommons.org/licenses/by/3.0/legalcode
+
+Title: Submarine
+Author: Poly by Google
+URL: https://poly.google.com/view/7-3Vgg6rR4j
+License: Creative Commons CC-BY
+https://creativecommons.org/licenses/by/3.0/legalcode
+
+Title: Treasure chest
+Author: Louis DeScioli
+URL: https://poly.google.com/view/f7SU-dO1FG7
+License: Creative Commons CC-BY
+https://creativecommons.org/licenses/by/3.0/legalcode
