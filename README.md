@@ -1,4 +1,4 @@
-# COMP 376 Assignment 2
+# COMP 376 Assignment 3
 
 Goal: Bring gold from the bottom of the sea to the boat on the surface while avoiding piranhas and the octopus!
 
