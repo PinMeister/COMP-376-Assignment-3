@@ -1,13 +1,12 @@
 ﻿using UnityEngine;
 
-public class Piranha : MonoBehaviour
+public class Shark : MonoBehaviour
 {
     [SerializeField]
     public int boundaryMax = 2;
     [SerializeField]
-    public float moveSpeed = 1;
+    public float moveSpeed = 10;
 
-    float positionOffset;
     int boundaryCounter;
     Transform leftBoundary;
     Transform rightBoundary;
@@ -33,7 +32,7 @@ public class Piranha : MonoBehaviour
     {
         if (GameObject.Find("Player").GetComponent<Player>().alive)
         {
-            if (GetComponent<SpriteRenderer>().flipX == true)
+            if (true)
             {
                 startPosition = transform.position;
                 startPosition.x += -1 * moveSpeed * Time.deltaTime;
@@ -49,20 +48,31 @@ public class Piranha : MonoBehaviour
             }
         }
 
-        if (transform.position.x > rightBoundary.position.x - positionOffset - 1)
+        if (transform.position.z > northBoundary.position.z)
         {
-            transform.position = new Vector2(leftBoundary.position.x + positionOffset, transform.position.y);
+            transform.position = new Vector3(transform.position.x, transform.position.y, southBoundary.position.z);
             boundaryCounter += 1;
         }
-        if (transform.position.x < leftBoundary.position.x + positionOffset)
+        if (transform.position.z < southBoundary.position.z)
         {
-            transform.position = new Vector2(rightBoundary.position.x - positionOffset - 1, transform.position.y);
+            transform.position = new Vector3(transform.position.x, transform.position.y, northBoundary.position.z);
+            boundaryCounter += 1;
+        }
+        if (transform.position.x > eastBoundary.position.x)
+        {
+            transform.position = new Vector3(westBoundary.position.x, transform.position.y, transform.position.z);
+            boundaryCounter += 1;
+        }
+        if (transform.position.x < westBoundary.position.x)
+        {
+            transform.position = new Vector3(eastBoundary.position.x, transform.position.y, transform.position.z);
             boundaryCounter += 1;
         }
 
         if (boundaryCounter == boundaryMax)
         {
-            gameSpawnerVariable.piranhaYList.Add((int)(transform.position.y));
+            gameSpawnerVariable.piranhaXList.Add((int)(transform.position.x));
+            gameSpawnerVariable.piranhaZList.Add((int)(transform.position.z));
             gameSpawnerVariable.piranhaCounter -= 1;
             Destroy(gameObject);
         }

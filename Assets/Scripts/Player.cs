@@ -7,6 +7,7 @@ public class Player : MonoBehaviour
     [SerializeField]    float rotateSpeed = 100;
     [SerializeField]    float swimForce = 50;
     [SerializeField]    float positionOffset = 0;
+    [SerializeField]    float knockback = 20;
 
     Rigidbody submarine;
     GameObject gold;
@@ -20,7 +21,9 @@ public class Player : MonoBehaviour
     public int tanks;
     public int lives;
     public bool alive = true;
-    bool invincibility = false;
+    public bool invincibility = false;
+    float invincibilityTimer;
+    float invincibilityDuration;
     bool hook = false;
     public float oxygen;
     public int totalOxygen;
@@ -37,7 +40,8 @@ public class Player : MonoBehaviour
         lives = 2;
         oxygen = 100;
         totalOxygen = 100;
-}
+        invincibilityDuration = 1;
+    }
 
     void Update()
     {
@@ -48,7 +52,18 @@ public class Player : MonoBehaviour
             
             if (tanks == 1)
             {
+                oxygen = 50;
                 totalOxygen = 50;
+            }
+
+            if (invincibility)
+            {
+                invincibilityTimer += Time.deltaTime;
+                if (invincibilityTimer >= invincibilityDuration)
+                {
+                    invincibility = false;
+                    invincibilityTimer = 0;
+                }
             }
 
             if (Input.GetButton("Backward"))
@@ -86,14 +101,6 @@ public class Player : MonoBehaviour
 
         /*if (tanks == 0 && alive == true)
         {
-            if (boostActive == true)
-            {
-                this.GetComponent<SpriteRenderer>().sprite = specialDead;
-            }
-            else
-            {
-                this.GetComponent<SpriteRenderer>().sprite = playerDead;
-            }
             submarine.GetComponent<Rigidbody2D>().gravityScale = 1;
             Destroy(gold);
             submarine.mass = 1;
@@ -108,7 +115,6 @@ public class Player : MonoBehaviour
 
         if (Input.GetKey("return") && alive == false && lives > 0)
         {
-            this.GetComponent<SpriteRenderer>().sprite = playerFull;
             submarine.GetComponent<Rigidbody2D>().gravityScale = 0.2f;
             alive = true;
             transform.position = new Vector2(0, 2);
@@ -135,14 +141,17 @@ public class Player : MonoBehaviour
 
             if (gold.name.Contains("Small Gold"))
             {
+                gold.transform.localPosition = new Vector3(0, -415, -180);
                 submarine.mass += 0.5f;
             }
             if (gold.name.Contains("Medium Gold"))
             {
+                gold.transform.localPosition = new Vector3(0, -475, 0);
                 submarine.mass += 0.75f;
             }
             if (gold.name.Contains("Large Gold"))
             {
+                gold.transform.localPosition = new Vector3(0, -820, 0);
                 submarine.mass += 1f;
             }
         }
@@ -170,10 +179,16 @@ public class Player : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "Enemy" && tanks > 0 && invincibility == false)
+        if (collision.gameObject.tag == "Enemy" && /*tanks > 0 &&*/ invincibility == false)
         {
-            invincibility = true;
-            tanks -= 1;
+            if (!invincibility)
+            {
+                Vector3 forceDirection = (transform.position - collision.transform.position).normalized * knockback;
+                submarine.velocity = Vector3.zero;
+                submarine.AddForce(forceDirection, ForceMode.Impulse);
+                invincibility = true;
+                tanks -= 1;
+            }
         }
 
         if (collision.gameObject.tag == "Surface")
@@ -186,14 +201,6 @@ public class Player : MonoBehaviour
             {
                 oxygen = 51;
             }
-        }
-    }
-
-    private void OnCollisionExit(Collision collision)
-    {
-        if (collision.gameObject.tag == "Enemy" && invincibility == true)
-        {
-            invincibility = false;
         }
     }
 

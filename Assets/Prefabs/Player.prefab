@@ -353,13 +353,14 @@ MonoBehaviour:
   rotateSpeed: 50
   swimForce: 500
   positionOffset: 0
+  knockback: 20
   score: 0
   tanks: 0
   lives: 0
   alive: 1
-  boostHeld: 0
-  boostActive: 0
-  boostTimer: 0
+  invincibility: 0
+  oxygen: 0
+  totalOxygen: 0
 --- !u!136 &2591163281758992996
 CapsuleCollider:
   m_ObjectHideFlags: 0

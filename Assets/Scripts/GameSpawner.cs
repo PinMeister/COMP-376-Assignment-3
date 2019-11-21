@@ -25,7 +25,9 @@ public class GameSpawner : MonoBehaviour
     int[] octopusXArray = { -7, 7 };
     int[] octopusYArray = { -2, -1, 0, 1 };
     int[] piranhaXArray = { -9, 9 };
+    public List<int> piranhaXList = new List<int> { -2, -1, 0, 1 };
     public List<int> piranhaYList = new List<int> { -2, -1, 0, 1 };
+    public List<int> piranhaZList = new List<int> { -2, -1, 0, 1 };
     public List<int> goldXList = new List<int> { -40, -20, 0, 20, 40 };
     public List<int> goldZList = new List<int> { -40, -20, 0, 20, 40 };
     public bool special = false;
