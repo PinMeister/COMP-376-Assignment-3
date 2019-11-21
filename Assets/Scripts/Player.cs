@@ -99,32 +99,32 @@ public class Player : MonoBehaviour
             transform.position = new Vector3(eastBoundary.position.x, transform.position.y, transform.position.z);
         }
 
-        /*if (tanks == 0 && alive == true)
+        if (tanks == 0 && alive == true)
         {
-            submarine.GetComponent<Rigidbody2D>().gravityScale = 1;
-            Destroy(gold);
             submarine.mass = 1;
+            oxygen = 0;
+            totalOxygen = 0;
+            Destroy(gold);
             hook = false;
             alive = false;
             lives -= 1;
-            boostActive = false;
-            moveSpeed = 3;
-            swimForce = 50;
-            boostTimer = 3;
         }
 
-        if (Input.GetKey("return") && alive == false && lives > 0)
+        if (Input.GetKey("return") && alive == false)
         {
-            submarine.GetComponent<Rigidbody2D>().gravityScale = 0.2f;
+            oxygen = 100;
+            totalOxygen = 100;
             alive = true;
-            transform.position = new Vector2(0, 2);
+            transform.position = new Vector3(0, 60, 0);
             tanks = 2;
-            if (boostHeld == true)
+
+            if (lives == 0)
             {
-                boostHeld = false;
-                gameSpawnerVariable.boostPresent = false;
+                score = 0;
+                lives = 2;
             }
-        }*/
+
+        }
     }
 
     void OnTriggerEnter(Collider collider)
@@ -175,21 +175,31 @@ public class Player : MonoBehaviour
             submarine.mass = 1;
             hook = false;
         }
+
+        if (collider.tag == "Enemy" && invincibility == false)
+        {
+            if (!invincibility)
+            {
+                if (tanks == 2)
+                {
+                    Vector3 forceDirection = (transform.position - collider.transform.position).normalized * knockback;
+                    submarine.velocity = Vector3.zero;
+                    submarine.AddForce(forceDirection, ForceMode.Impulse);
+                    invincibility = true;
+                    tanks -= 1;
+                }
+                else
+                {
+                    submarine.velocity = Vector3.zero;
+                    submarine.AddForce(new Vector3(0, -100, 0), ForceMode.Impulse);
+                    tanks -= 1;
+                }
+            }
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "Enemy" && /*tanks > 0 &&*/ invincibility == false)
-        {
-            if (!invincibility)
-            {
-                Vector3 forceDirection = (transform.position - collision.transform.position).normalized * knockback;
-                submarine.velocity = Vector3.zero;
-                submarine.AddForce(forceDirection, ForceMode.Impulse);
-                invincibility = true;
-                tanks -= 1;
-            }
-        }
 
         if (collision.gameObject.tag == "Surface")
         {
