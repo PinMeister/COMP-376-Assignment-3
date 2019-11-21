@@ -25,6 +25,7 @@ public class Gold : MonoBehaviour
             {
                 float timePassed = Time.time;
                 gameSpawnerVariable.goldXList.Add((int)(transform.position.x));
+                gameSpawnerVariable.goldZList.Add((int)(transform.position.z));
                 gameSpawnerVariable.goldCounter -= 1;
                 Destroy(gameObject);
             }

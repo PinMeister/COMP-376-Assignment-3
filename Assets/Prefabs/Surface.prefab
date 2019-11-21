@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3078946771546366660}
   m_Layer: 0
   m_Name: Surface
-  m_TagString: Untagged
+  m_TagString: Surface
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -124,7 +124,7 @@ GameObject:
   - component: {fileID: 7311650625601154685}
   m_Layer: 0
   m_Name: Surface Collider
-  m_TagString: Untagged
+  m_TagString: Surface
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

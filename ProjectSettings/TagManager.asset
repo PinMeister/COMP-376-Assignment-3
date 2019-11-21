@@ -8,6 +8,8 @@ TagManager:
   - Gold
   - Boat
   - Boost
+  - Fire
+  - Surface
   layers:
   - Default
   - TransparentFX

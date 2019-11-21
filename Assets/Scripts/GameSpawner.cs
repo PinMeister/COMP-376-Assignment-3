@@ -6,12 +6,11 @@ public class GameSpawner : MonoBehaviour
 {
     [SerializeField] float levelDuration = 30;
     [SerializeField] float pirhanaSpawnInterval = 5;
-    /*[SerializeField] GameObject piranha;
-    [SerializeField] GameObject octopus;
+    //[SerializeField] GameObject piranha;
+    //[SerializeField] GameObject octopus;
     [SerializeField] GameObject smallGold;
     [SerializeField] GameObject mediumGold;
     [SerializeField] GameObject largeGold;
-    [SerializeField] GameObject boost;*/
     
     public int level = 1;
     public int piranhaCounter = 0;
@@ -27,7 +26,8 @@ public class GameSpawner : MonoBehaviour
     int[] octopusYArray = { -2, -1, 0, 1 };
     int[] piranhaXArray = { -9, 9 };
     public List<int> piranhaYList = new List<int> { -2, -1, 0, 1 };
-    public List<int> goldXList = new List<int> { -8, -4, 0, 4, 8 };
+    public List<int> goldXList = new List<int> { -40, -20, 0, 20, 40 };
+    public List<int> goldZList = new List<int> { -40, -20, 0, 20, 40 };
     public bool special = false;
     public bool boostPresent = false;
 
@@ -115,54 +115,38 @@ public class GameSpawner : MonoBehaviour
             octopus.GetComponent<Octopus>().moveSpeed = octopusSpeed;
             int octopusBoundaryMax = 2;
             octopus.GetComponent<Octopus>().boundaryMax = octopusBoundaryMax;
-        }
+        }*/
 
         if (goldCounter < goldMax && goldTimer <= 0)
         {
             int goldX = goldXList[Random.Range(0, goldXList.Count)];
+            int goldZ = goldZList[Random.Range(0, goldXList.Count)];
             goldXList.Remove(goldX);
+            goldZList.Remove(goldZ);
 
             float randomGoldSize = Random.Range(0f, 1f);
 
             if (randomGoldSize <= 0.6)
             {
-                Instantiate(smallGold, new Vector2(goldX, -4), Quaternion.identity);
+                Instantiate(smallGold, new Vector3(goldX, 0.5f, goldZ), Quaternion.identity);
             }
             if (randomGoldSize > 0.6 && randomGoldSize <= 0.9)
             {
-                Instantiate(mediumGold, new Vector2(goldX, -4), Quaternion.identity);
+                Instantiate(mediumGold, new Vector3(goldX, 1, goldZ), Quaternion.identity);
             }
             if (randomGoldSize > 0.9)
             {
-                Instantiate(largeGold, new Vector2(goldX, -4), Quaternion.identity);
+                Instantiate(largeGold, new Vector3(goldX, 5, goldZ), Quaternion.identity);
             }
 
             goldCounter += 1;
             goldTimer = Random.Range(5, 10);
         }
 
-        if (special == true && boostPresent == false)
-        {
-            boostPresent = true;
-            int boostX = Random.Range(-8, 9);
-            int boostY = Random.Range(-3, 3);
-            Instantiate(boost, new Vector2(boostX, boostY), Quaternion.identity);
-        }*/
-
         if (levelTimer <= 0)
         {
             levelTimer = levelDuration;
             level += 1;
-        }
-
-        if (Input.GetKey(KeyCode.RightShift) && special == false)
-        {
-            Application.LoadLevel("Version Special");
-        }
-
-        if (Input.GetKey(KeyCode.RightControl) && special == true)
-        {
-            Application.LoadLevel("Version Normal");
         }
     }
 }

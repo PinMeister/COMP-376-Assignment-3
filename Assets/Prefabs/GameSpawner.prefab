@@ -45,15 +45,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelDuration: 30
   pirhanaSpawnInterval: 5
-  piranha: {fileID: 223071902139002444, guid: f22eb3f8eece6d943a1302b5038f9171, type: 3}
-  octopus: {fileID: 7446207284647258572, guid: 210c90cf1daa8d14b8bb3fc2720c2cbf, type: 3}
-  smallGold: {fileID: 855245542748809705, guid: c4b30c715a97471478287c139c8c6970,
+  smallGold: {fileID: 2437723370957469514, guid: c4b30c715a97471478287c139c8c6970,
     type: 3}
-  mediumGold: {fileID: 93393285189898085, guid: f268ea2b70bf386409353d1ab9328783,
+  mediumGold: {fileID: 3825390216015844196, guid: 051a194f041e53b479179d1d364667d8,
     type: 3}
   largeGold: {fileID: 5326583196382119576, guid: b3758cb9050a9484baa68c68a9b05e03,
     type: 3}
-  boost: {fileID: 3455416214752887657, guid: 5b88322f0ba289841b3d8dd368f083b1, type: 3}
   level: 1
   piranhaCounter: 0
   goldCounter: 0
@@ -61,6 +58,7 @@ MonoBehaviour:
   octopusTimer: 0
   octopusPresent: 0
   piranhaYList: feffffffffffffff0000000001000000
-  goldXList: fafffffffdffffff000000000300000006000000
+  goldXList: d8ffffffecffffff000000001400000028000000
+  goldZList: d8ffffffecffffff000000001400000028000000
   special: 0
   boostPresent: 0

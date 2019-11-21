@@ -22,9 +22,8 @@ public class Player : MonoBehaviour
     public bool alive = true;
     bool invincibility = false;
     bool hook = false;
-    public bool boostHeld = false;
-    public bool boostActive = false;
-    public float boostTimer;
+    public float oxygen;
+    public int totalOxygen;
 
     void Start()
     {
@@ -36,13 +35,22 @@ public class Player : MonoBehaviour
         westBoundary = GameObject.Find("West Boundary").transform;
         tanks = 2;
         lives = 2;
-        boostTimer = 3;
+        oxygen = 100;
+        totalOxygen = 100;
 }
 
     void Update()
     {
         if (alive == true)
         {
+
+            oxygen -= 1 * Time.deltaTime / 2;
+            
+            if (tanks == 1)
+            {
+                totalOxygen = 50;
+            }
+
             if (Input.GetButton("Backward"))
                 transform.Translate(-Vector3.forward * moveSpeed * Time.deltaTime);
             else if (Input.GetButton("Forward"))
@@ -76,50 +84,7 @@ public class Player : MonoBehaviour
             transform.position = new Vector3(eastBoundary.position.x, transform.position.y, transform.position.z);
         }
 
-        if (boostActive == true)
-        {
-            boostTimer -= Time.deltaTime;
-            moveSpeed = 9;
-            swimForce = 150;
-            submarine.GetComponent<Rigidbody2D>().gravityScale = 0.6f;
-        }
-
-        if (boostTimer <= 0)
-        {
-            gameSpawnerVariable.boostPresent = false;
-            boostActive = false;
-            boostHeld = false;
-            moveSpeed = 3;
-            swimForce = 50;
-            boostTimer = 3;
-            submarine.GetComponent<Rigidbody2D>().gravityScale = 0.2f;
-        }
-
-        /*if (tanks == 2)
-        {
-            if (boostActive == true)
-            {
-                this.GetComponent<SpriteRenderer>().sprite = specialFull;
-            }
-            else
-            {
-                this.GetComponent<SpriteRenderer>().sprite = playerFull;
-            }
-        }
-
-        if (tanks == 1)
-        {
-            if (boostActive == true)
-            {
-                this.GetComponent<SpriteRenderer>().sprite = specialHit;
-            }
-            else
-            {
-                this.GetComponent<SpriteRenderer>().sprite = playerHit;
-            }
-        }
-
-        if (tanks == 0 && alive == true)
+        /*if (tanks == 0 && alive == true)
         {
             if (boostActive == true)
             {
@@ -154,30 +119,19 @@ public class Player : MonoBehaviour
                 gameSpawnerVariable.boostPresent = false;
             }
         }*/
-
-        if (Input.GetKey(KeyCode.LeftShift) && boostHeld == true && gameSpawnerVariable.special == true)
-        {
-            boostActive = true;
-        }
     }
 
-    void OnTriggerEnter2D(Collider2D collider)
+    void OnTriggerEnter(Collider collider)
     {
-        if (collider.tag == "Enemy" && tanks > 0 && invincibility == false)
-        {
-            invincibility = true;
-            tanks -= 1;
-        }
-
         if (collider.tag == "Gold" && hook == false)
         {
             collider.transform.parent = transform;
             collider.enabled = false;
             hook = true;
+            gameSpawnerVariable.goldXList.Add((int)(transform.position.x));
+            gameSpawnerVariable.goldZList.Add((int)(transform.position.z));
             gold = GetChildWithTag("Gold");
-            gameSpawnerVariable.goldXList.Add((int)(gold.transform.position.x));
             gameSpawnerVariable.goldCounter -= 1;
-            gold.transform.localPosition = new Vector2(0.06f, -1.1f);
 
             if (gold.name.Contains("Small Gold"))
             {
@@ -212,17 +166,32 @@ public class Player : MonoBehaviour
             submarine.mass = 1;
             hook = false;
         }
+    }
 
-        if (collider.tag == "Boost" && boostHeld == false)
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Enemy" && tanks > 0 && invincibility == false)
         {
-            Destroy(GameObject.FindGameObjectWithTag("Boost"));
-            boostHeld = true;
+            invincibility = true;
+            tanks -= 1;
+        }
+
+        if (collision.gameObject.tag == "Surface")
+        {
+            if (tanks == 2)
+            {
+                oxygen = 101;
+            }
+            if (tanks == 1)
+            {
+                oxygen = 51;
+            }
         }
     }
 
-    private void OnTriggerExit2D(Collider2D collider)
+    private void OnCollisionExit(Collision collision)
     {
-        if (collider.tag == "Enemy" && invincibility == true)
+        if (collision.gameObject.tag == "Enemy" && invincibility == true)
         {
             invincibility = false;
         }
