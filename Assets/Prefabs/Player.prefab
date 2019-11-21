@@ -350,7 +350,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 30
-  rotateSpeed: 100
+  rotateSpeed: 300
   swimForce: 200
   positionOffset: 0
   score: 0

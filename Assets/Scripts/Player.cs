@@ -53,7 +53,7 @@ public class Player : MonoBehaviour
             else if (Input.GetButton("Right"))
                 transform.Rotate(Vector3.up * rotateSpeed * Time.deltaTime);
             
-            if (Input.GetKeyDown("space") || Input.GetKeyDown("w") || Input.GetKeyDown("up"))
+            if (Input.GetKeyDown("space") || Input.GetMouseButtonDown(0))
             {
                 submarine.AddForce(Vector2.up * swimForce);
             }
