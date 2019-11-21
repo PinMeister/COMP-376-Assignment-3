@@ -76,7 +76,6 @@ public class GameSpawner : MonoBehaviour
                 else
                 {
                     Instantiate(shark, new Vector3(randomXZ, sharkY, 50), Quaternion.Euler(0, -180, 0)); // n to s
-
                 }
             }
             else
@@ -120,7 +119,6 @@ public class GameSpawner : MonoBehaviour
                 else
                 {
                     Instantiate(octopus, new Vector3(randomXZ, octopusY, 50), Quaternion.Euler(0, -180, 0)); // n to s
-
                 }
             }
             else

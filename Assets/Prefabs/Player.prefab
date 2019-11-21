@@ -354,6 +354,7 @@ MonoBehaviour:
   swimForce: 500
   positionOffset: 0
   knockback: 20
+  torpedo: {fileID: 1154121745365628380, guid: 2dce2ea00073f4342868880b77c0e4c7, type: 3}
   score: 0
   tanks: 0
   lives: 0
@@ -361,6 +362,7 @@ MonoBehaviour:
   invincibility: 0
   oxygen: 0
   totalOxygen: 0
+  torpedoPresent: 0
 --- !u!136 &2591163281758992996
 CapsuleCollider:
   m_ObjectHideFlags: 0

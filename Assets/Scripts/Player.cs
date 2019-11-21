@@ -11,7 +11,6 @@ public class Player : MonoBehaviour
 
     Rigidbody submarine;
     GameObject gold;
-    GameObject boost;
     GameSpawner gameSpawnerVariable;
     Transform northBoundary;
     Transform southBoundary;
@@ -66,6 +65,12 @@ public class Player : MonoBehaviour
                 }
             }
 
+            /*if (Input.GetKey("space") && !torpedoPresent)
+            {
+                Instantiate(torpedo, transform.position + (transform.forward * 11), Quaternion.identity);
+                torpedoPresent = true;
+            }*/
+
             if (Input.GetButton("Backward"))
                 transform.Translate(-Vector3.forward * moveSpeed * Time.deltaTime);
             else if (Input.GetButton("Forward"))
@@ -76,7 +81,7 @@ public class Player : MonoBehaviour
             else if (Input.GetButton("Right"))
                 transform.Rotate(Vector3.up * rotateSpeed * Time.deltaTime);
             
-            if (Input.GetKeyDown("space") || Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(0))
             {
                 submarine.AddForce(Vector2.up * swimForce);
             }
@@ -198,10 +203,29 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnCollisionEnter(Collision col)
     {
-
-        if (collision.gameObject.tag == "Surface")
+        if (col.gameObject.tag == "Torpedo" && invincibility == false)
+        {
+            if (!invincibility)
+            {
+                if (tanks == 2)
+                {
+                    Vector3 forceDirection = (transform.position - col.gameObject.transform.position).normalized * knockback;
+                    submarine.velocity = Vector3.zero;
+                    submarine.AddForce(forceDirection, ForceMode.Impulse);
+                    invincibility = true;
+                    tanks -= 1;
+                }
+                else
+                {
+                    submarine.velocity = Vector3.zero;
+                    submarine.AddForce(new Vector3(0, -100, 0), ForceMode.Impulse);
+                    tanks -= 1;
+                }
+            }
+        }
+        if (col.gameObject.tag == "Surface")
         {
             if (tanks == 2)
             {

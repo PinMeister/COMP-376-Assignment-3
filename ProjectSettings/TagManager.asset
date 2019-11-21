@@ -10,6 +10,7 @@ TagManager:
   - Boost
   - Fire
   - Surface
+  - Torpedo
   layers:
   - Default
   - TransparentFX

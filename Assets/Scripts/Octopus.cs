@@ -6,6 +6,8 @@ public class Octopus : MonoBehaviour
     public float moveSpeed = 10;
     [SerializeField]
     public int boundaryMax = 2;
+    [SerializeField]
+    GameObject torpedo;
 
     int boundaryCounter;
     GameSpawner gameSpawnerVariable;
@@ -13,6 +15,7 @@ public class Octopus : MonoBehaviour
     Transform southBoundary;
     Transform eastBoundary;
     Transform westBoundary;
+    public bool torpedoPresent = false;
 
     void Start()
     {
@@ -59,5 +62,11 @@ public class Octopus : MonoBehaviour
 
             Destroy(gameObject);
         }
+
+        if (!torpedoPresent)
+            {
+                Instantiate(torpedo, transform.position, Quaternion.identity);
+                torpedoPresent = true;
+            }
     }
 }
