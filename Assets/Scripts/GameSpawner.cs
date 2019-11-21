@@ -22,9 +22,9 @@ public class GameSpawner : MonoBehaviour
     float sharkTimer;
     public float octopusTimer;
     public bool octopusPresent = false;
+    int[] enemyXZArray = { -50, 50 };
     int[] octopusXZArray = { -30, -10, 10, 30 };
     int[] octopusYArray = { -2, -1, 0, 1 };
-    int[] enemyXZArray = { -50, 50 };
     int[] sharkXZArray = { -40, -20, 0, 20, 40 };
     public List<int> sharkYList = new List<int> { 20, 30, 40, 50 };
     public List<int> goldXList = new List<int> { -40, -20, 0, 20, 40 };
