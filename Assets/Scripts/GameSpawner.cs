@@ -7,7 +7,7 @@ public class GameSpawner : MonoBehaviour
     [SerializeField] float levelDuration = 30;
     [SerializeField] float sharkSpawnInterval = 5;
     [SerializeField] GameObject shark;
-    //[SerializeField] GameObject octopus;
+    [SerializeField] GameObject octopus;
     [SerializeField] GameObject smallGold;
     [SerializeField] GameObject mediumGold;
     [SerializeField] GameObject largeGold;
@@ -24,7 +24,7 @@ public class GameSpawner : MonoBehaviour
     public bool octopusPresent = false;
     int[] enemyXZArray = { -50, 50 };
     int[] octopusXZArray = { -30, -10, 10, 30 };
-    int[] octopusYArray = { -2, -1, 0, 1 };
+    int[] octopusYArray = { 25, 35, 45 };
     int[] sharkXZArray = { -40, -20, 0, 20, 40 };
     public List<int> sharkYList = new List<int> { 20, 30, 40, 50 };
     public List<int> goldXList = new List<int> { -40, -20, 0, 20, 40 };
@@ -71,11 +71,11 @@ public class GameSpawner : MonoBehaviour
             {
                 if (randomBoundary <= 0.5)
                 {
-                    GameObject newShark = Instantiate(shark, new Vector3(50, sharkY, randomXZ), Quaternion.Euler(0, -90, 0)); // e to w
+                    Instantiate(shark, new Vector3(50, sharkY, randomXZ), Quaternion.Euler(0, -90, 0)); // e to w
                 }
                 else
                 {
-                    GameObject newShark = Instantiate(shark, new Vector3(randomXZ, sharkY, 50), Quaternion.Euler(0, -180, 0)); // n to s
+                    Instantiate(shark, new Vector3(randomXZ, sharkY, 50), Quaternion.Euler(0, -180, 0)); // n to s
 
                 }
             }
@@ -83,18 +83,15 @@ public class GameSpawner : MonoBehaviour
             {
                 if (randomBoundary <= 0.5)
                 {
-                    GameObject newShark = Instantiate(shark, new Vector3(-50, sharkY, randomXZ), Quaternion.Euler(0, 90, 0)); // w to e
+                    Instantiate(shark, new Vector3(-50, sharkY, randomXZ), Quaternion.Euler(0, 90, 0)); // w to e
                 }
                 else
                 {
-                    GameObject newShark = Instantiate(shark, new Vector3(randomXZ, sharkY, -50), Quaternion.identity); // s to n
+                    Instantiate(shark, new Vector3(randomXZ, sharkY, -50), Quaternion.identity); // s to n
                 }
             }
 
-            float sharkSize = Random.Range(1.5f, 2.5f);
             float sharkSpeed = Random.Range(10f, 20f) + (level + 5) * 0.5f;
-
-            shark.transform.localScale = new Vector3(sharkSize, sharkSize, sharkSize);
             shark.GetComponent<Shark>().moveSpeed = sharkSpeed;
             int sharkBoundaryMax = Random.Range(3, 5);
             shark.GetComponent<Shark>().boundaryMax = sharkBoundaryMax;
@@ -104,29 +101,45 @@ public class GameSpawner : MonoBehaviour
             
         }
 
-        /*if (octopusTimer <= 0 && octopusPresent == false)
+        if (octopusTimer <= 0 && octopusPresent == false)
         {
             octopusPresent = true;
 
-            int octopusX = octopusXArray[Random.Range(0, octopusXArray.Length)];
+            int octopusXZ = octopusXZArray[Random.Range(0, octopusXZArray.Length)];
             int octopusY = octopusYArray[Random.Range(0, octopusYArray.Length)];
-            
-            if (octopusX == 7)
+
+            float randomBoundary = Random.Range(0f, 1f);
+            int randomXZ = octopusXZArray[Random.Range(0, octopusXZArray.Length)];
+
+            if (octopusXZ == 50)
             {
-                octopus.GetComponent<SpriteRenderer>().flipX = false;
+                if (randomBoundary <= 0.5)
+                {
+                    Instantiate(octopus, new Vector3(50, octopusY, randomXZ), Quaternion.Euler(0, -90, 0)); // e to w
+                }
+                else
+                {
+                    Instantiate(octopus, new Vector3(randomXZ, octopusY, 50), Quaternion.Euler(0, -180, 0)); // n to s
+
+                }
             }
             else
             {
-                octopus.GetComponent<SpriteRenderer>().flipX = true;
+                if (randomBoundary <= 0.5)
+                {
+                    Instantiate(octopus, new Vector3(-50, octopusY, randomXZ), Quaternion.Euler(0, 90, 0)); // w to e
+                }
+                else
+                {
+                    Instantiate(octopus, new Vector3(randomXZ, octopusY, -50), Quaternion.identity); // s to n
+                }
             }
 
-            Instantiate(octopus, new Vector2(octopusX, octopusY), Quaternion.identity);
-
-            float octopusSpeed = Random.Range(1f, 2f) + level * 0.5f;
+            float octopusSpeed = Random.Range(10f, 20f) + (level + 5) * 0.5f;
             octopus.GetComponent<Octopus>().moveSpeed = octopusSpeed;
             int octopusBoundaryMax = 2;
             octopus.GetComponent<Octopus>().boundaryMax = octopusBoundaryMax;
-        }*/
+        }
 
         if (goldCounter < goldMax && goldTimer <= 0)
         {
