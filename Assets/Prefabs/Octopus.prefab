@@ -165,5 +165,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be742f36616dc2e41b5b4799e1370e4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 10
+  moveSpeed: 18.41156
   boundaryMax: 2
+  torpedo: {fileID: 2515730194469190295, guid: 2dce2ea00073f4342868880b77c0e4c7, type: 3}
+  torpedoPresent: 0
