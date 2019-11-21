@@ -8,8 +8,6 @@ public class Shark : MonoBehaviour
     public float moveSpeed = 10;
 
     int boundaryCounter;
-    Transform leftBoundary;
-    Transform rightBoundary;
     GameSpawner gameSpawnerVariable;
     Transform northBoundary;
     Transform southBoundary;

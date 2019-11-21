@@ -3,22 +3,24 @@
 public class Octopus : MonoBehaviour
 {
     [SerializeField]
-    public float moveSpeed = 1;
-    [SerializeField]
-    float positionOffset = 2.5f;
+    public float moveSpeed = 10;
     [SerializeField]
     public int boundaryMax = 2;
 
     int boundaryCounter;
-    Transform leftBoundary;
-    Transform rightBoundary;
     GameSpawner gameSpawnerVariable;
+    Transform northBoundary;
+    Transform southBoundary;
+    Transform eastBoundary;
+    Transform westBoundary;
 
     void Start()
     {
         boundaryCounter = 0;
-        leftBoundary = GameObject.Find("LeftBoundary").transform;
-        rightBoundary = GameObject.Find("RightBoundary").transform;
+        northBoundary = GameObject.Find("North Boundary").transform;
+        southBoundary = GameObject.Find("South Boundary").transform;
+        eastBoundary = GameObject.Find("East Boundary").transform;
+        westBoundary = GameObject.Find("West Boundary").transform;
         gameSpawnerVariable = GameObject.Find("GameSpawner").GetComponent<GameSpawner>();
     }
 
@@ -26,24 +28,27 @@ public class Octopus : MonoBehaviour
     {
         if (GameObject.Find("Player").GetComponent<Player>().alive)
         {
-            if (GetComponent<SpriteRenderer>().flipX == true)
-            {
-                transform.Translate(Vector2.right * moveSpeed * Time.deltaTime);
-            }
-            else
-            {
-                transform.Translate(Vector2.left * moveSpeed * Time.deltaTime);
-            }
+            transform.Translate(transform.forward * moveSpeed * Time.deltaTime, Space.World);
         }
 
-        if (transform.position.x > rightBoundary.position.x - positionOffset - 1)
+        if (transform.position.z > northBoundary.position.z)
         {
-            GetComponent<SpriteRenderer>().flipX = false;
+            transform.Rotate(0, 180, 0);
             boundaryCounter += 1;
         }
-        if (transform.position.x < leftBoundary.position.x + positionOffset)
+        if (transform.position.z < southBoundary.position.z)
         {
-            GetComponent<SpriteRenderer>().flipX = true;
+            transform.Rotate(0, 180, 0);
+            boundaryCounter += 1;
+        }
+        if (transform.position.x > eastBoundary.position.x)
+        {
+            transform.Rotate(0, 180, 0);
+            boundaryCounter += 1;
+        }
+        if (transform.position.x < westBoundary.position.x)
+        {
+            transform.Rotate(0, 180, 0);
             boundaryCounter += 1;
         }
 
