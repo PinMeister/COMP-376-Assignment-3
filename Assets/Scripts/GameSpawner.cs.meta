@@ -4,6 +4,7 @@ MonoImporter:
   externalObjects: {}
   serializedVersion: 2
   defaultReferences:
+  - shark: {fileID: 2193018823069865456, guid: 0ea58dd55435ada4e89f892353711aa4, type: 3}
   - smallGold: {fileID: 2437723370957469514, guid: c4b30c715a97471478287c139c8c6970,
       type: 3}
   - mediumGold: {fileID: 3825390216015844196, guid: 051a194f041e53b479179d1d364667d8,

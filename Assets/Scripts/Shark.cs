@@ -3,7 +3,7 @@
 public class Shark : MonoBehaviour
 {
     [SerializeField]
-    public int boundaryMax = 2;
+    public int boundaryMax = 3;
     [SerializeField]
     public float moveSpeed = 10;
 
@@ -11,7 +11,6 @@ public class Shark : MonoBehaviour
     Transform leftBoundary;
     Transform rightBoundary;
     GameSpawner gameSpawnerVariable;
-    Vector3 startPosition;
     Transform northBoundary;
     Transform southBoundary;
     Transform eastBoundary;
@@ -25,27 +24,13 @@ public class Shark : MonoBehaviour
         eastBoundary = GameObject.Find("East Boundary").transform;
         westBoundary = GameObject.Find("West Boundary").transform;
         gameSpawnerVariable = GameObject.Find("GameSpawner").GetComponent<GameSpawner>();
-        startPosition = transform.position;
     }
 
     void Update()
     {
         if (GameObject.Find("Player").GetComponent<Player>().alive)
         {
-            if (true)
-            {
-                startPosition = transform.position;
-                startPosition.x += -1 * moveSpeed * Time.deltaTime;
-                //startPosition.y += Mathf.Sin(Time.time) * Time.deltaTime * moveSpeed;
-                transform.position = startPosition;
-            }
-            else
-            {
-                startPosition = transform.position;
-                startPosition.x += 1 * moveSpeed * Time.deltaTime;
-                //startPosition.y += Mathf.Sin(Time.time) * Time.deltaTime * moveSpeed;
-                transform.position = startPosition;
-            }
+            transform.Translate(transform.forward * moveSpeed * Time.deltaTime, Space.World);
         }
 
         if (transform.position.z > northBoundary.position.z)
@@ -71,9 +56,8 @@ public class Shark : MonoBehaviour
 
         if (boundaryCounter == boundaryMax)
         {
-            gameSpawnerVariable.piranhaXList.Add((int)(transform.position.x));
-            gameSpawnerVariable.piranhaZList.Add((int)(transform.position.z));
-            gameSpawnerVariable.piranhaCounter -= 1;
+            gameSpawnerVariable.sharkYList.Add((int)(transform.position.y));
+            gameSpawnerVariable.sharkCounter -= 1;
             Destroy(gameObject);
         }
 

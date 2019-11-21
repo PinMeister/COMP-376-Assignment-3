@@ -5,43 +5,36 @@ using UnityEngine.SceneManagement;
 public class GameSpawner : MonoBehaviour
 {
     [SerializeField] float levelDuration = 30;
-    [SerializeField] float pirhanaSpawnInterval = 5;
-    //[SerializeField] GameObject piranha;
+    [SerializeField] float sharkSpawnInterval = 5;
+    [SerializeField] GameObject shark;
     //[SerializeField] GameObject octopus;
     [SerializeField] GameObject smallGold;
     [SerializeField] GameObject mediumGold;
     [SerializeField] GameObject largeGold;
     
     public int level = 1;
-    public int piranhaCounter = 0;
-    int piranhaMax = 4;
+    public int sharkCounter = 0;
+    int sharkMax = 4;
     public int goldCounter = 0;
     int goldMax = 5;
     public float levelTimer;
     float goldTimer;
-    float pirhanaTimer;
+    float sharkTimer;
     public float octopusTimer;
     public bool octopusPresent = false;
-    int[] octopusXArray = { -7, 7 };
+    int[] octopusXZArray = { -30, -10, 10, 30 };
     int[] octopusYArray = { -2, -1, 0, 1 };
-    int[] piranhaXArray = { -9, 9 };
-    public List<int> piranhaXList = new List<int> { -2, -1, 0, 1 };
-    public List<int> piranhaYList = new List<int> { -2, -1, 0, 1 };
-    public List<int> piranhaZList = new List<int> { -2, -1, 0, 1 };
+    int[] enemyXZArray = { -50, 50 };
+    int[] sharkXZArray = { -40, -20, 0, 20, 40 };
+    public List<int> sharkYList = new List<int> { 20, 30, 40, 50 };
     public List<int> goldXList = new List<int> { -40, -20, 0, 20, 40 };
     public List<int> goldZList = new List<int> { -40, -20, 0, 20, 40 };
-    public bool special = false;
-    public bool boostPresent = false;
+    public bool flipped;
 
     void Start()
     {
-        if (SceneManager.GetActiveScene().name == "Version Special")
-        {
-            special = true;
-        }
-
         levelTimer = levelDuration;
-        pirhanaTimer = pirhanaSpawnInterval;
+        sharkTimer = sharkSpawnInterval;
         goldTimer = 1;
 
         if (levelTimer > 5)
@@ -59,43 +52,59 @@ public class GameSpawner : MonoBehaviour
         if (GameObject.Find("Player").GetComponent<Player>().alive)
         {
             levelTimer -= Time.deltaTime;
-            pirhanaTimer -= Time.deltaTime;
+            sharkTimer -= Time.deltaTime;
             octopusTimer -= Time.deltaTime;
             goldTimer -= Time.deltaTime;
         }
 
-        /*if (piranhaCounter < piranhaMax && pirhanaTimer <= 0)
+        if (sharkCounter < sharkMax && sharkTimer <= 0)
         {
-            int piranhaX = piranhaXArray[Random.Range(0, piranhaXArray.Length)];
-            int piranhaY = piranhaYList[Random.Range(0, piranhaYList.Count)];
+            int sharkXZ = enemyXZArray[Random.Range(0, enemyXZArray.Length)];
+            int sharkY = sharkYList[Random.Range(0, sharkYList.Count)];
 
-            piranhaYList.Remove(piranhaY);
+            sharkYList.Remove(sharkY);
 
-            if (piranhaX == 9)
+            float randomBoundary = Random.Range(0f, 1f);
+            int randomXZ = sharkXZArray[Random.Range(0, sharkXZArray.Length)];
+
+            if (sharkXZ == 50)
             {
-                piranha.GetComponent<SpriteRenderer>().flipX = true;
+                if (randomBoundary <= 0.5)
+                {
+                    GameObject newShark = Instantiate(shark, new Vector3(50, sharkY, randomXZ), Quaternion.Euler(0, -90, 0)); // e to w
+                }
+                else
+                {
+                    GameObject newShark = Instantiate(shark, new Vector3(randomXZ, sharkY, 50), Quaternion.Euler(0, -180, 0)); // n to s
+
+                }
             }
             else
             {
-                piranha.GetComponent<SpriteRenderer>().flipX = false;
+                if (randomBoundary <= 0.5)
+                {
+                    GameObject newShark = Instantiate(shark, new Vector3(-50, sharkY, randomXZ), Quaternion.Euler(0, 90, 0)); // w to e
+                }
+                else
+                {
+                    GameObject newShark = Instantiate(shark, new Vector3(randomXZ, sharkY, -50), Quaternion.identity); // s to n
+                }
             }
-            
-            Instantiate(piranha, new Vector2(piranhaX, piranhaY), Quaternion.identity);
 
-            float piranhaSize = Random.Range(0.25f, 0.75f);
-            float piranhaSpeed = Random.Range(1f, 2f) + level * 0.5f;
+            float sharkSize = Random.Range(1.5f, 2.5f);
+            float sharkSpeed = Random.Range(10f, 20f) + (level + 5) * 0.5f;
 
-            piranha.transform.localScale = new Vector2(piranhaSize, piranhaSize);
-            piranha.GetComponent<Piranha>().moveSpeed = piranhaSpeed;
-            int piranhaBoundaryMax = Random.Range(3, 5);
-            piranha.GetComponent<Piranha>().boundaryMax = piranhaBoundaryMax;
+            shark.transform.localScale = new Vector3(sharkSize, sharkSize, sharkSize);
+            shark.GetComponent<Shark>().moveSpeed = sharkSpeed;
+            int sharkBoundaryMax = Random.Range(3, 5);
+            shark.GetComponent<Shark>().boundaryMax = sharkBoundaryMax;
 
-            piranhaCounter += 1;
-            pirhanaTimer = pirhanaSpawnInterval;
+            sharkCounter += 1;
+            sharkTimer = sharkSpawnInterval;
             
         }
 
-        if (octopusTimer <= 0 && octopusPresent == false)
+        /*if (octopusTimer <= 0 && octopusPresent == false)
         {
             octopusPresent = true;
 
