@@ -6,12 +6,12 @@ public class GameSpawner : MonoBehaviour
 {
     [SerializeField] float levelDuration = 30;
     [SerializeField] float pirhanaSpawnInterval = 5;
-    [SerializeField] GameObject piranha;
+    /*[SerializeField] GameObject piranha;
     [SerializeField] GameObject octopus;
     [SerializeField] GameObject smallGold;
     [SerializeField] GameObject mediumGold;
     [SerializeField] GameObject largeGold;
-    [SerializeField] GameObject boost;
+    [SerializeField] GameObject boost;*/
     
     public int level = 1;
     public int piranhaCounter = 0;
@@ -62,7 +62,7 @@ public class GameSpawner : MonoBehaviour
             goldTimer -= Time.deltaTime;
         }
 
-        if (piranhaCounter < piranhaMax && pirhanaTimer <= 0)
+        /*if (piranhaCounter < piranhaMax && pirhanaTimer <= 0)
         {
             int piranhaX = piranhaXArray[Random.Range(0, piranhaXArray.Length)];
             int piranhaY = piranhaYList[Random.Range(0, piranhaYList.Count)];
@@ -147,7 +147,7 @@ public class GameSpawner : MonoBehaviour
             int boostX = Random.Range(-8, 9);
             int boostY = Random.Range(-3, 3);
             Instantiate(boost, new Vector2(boostX, boostY), Quaternion.identity);
-        }
+        }*/
 
         if (levelTimer <= 0)
         {

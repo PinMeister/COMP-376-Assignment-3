@@ -1,0 +1,66 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4283266771554888536
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4283266771554888538}
+  - component: {fileID: 4283266771554888539}
+  m_Layer: 0
+  m_Name: GameSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4283266771554888538
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4283266771554888536}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4283266771554888539
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4283266771554888536}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 702a8e180a2dda9498a9a62d679016e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levelDuration: 30
+  pirhanaSpawnInterval: 5
+  piranha: {fileID: 223071902139002444, guid: f22eb3f8eece6d943a1302b5038f9171, type: 3}
+  octopus: {fileID: 7446207284647258572, guid: 210c90cf1daa8d14b8bb3fc2720c2cbf, type: 3}
+  smallGold: {fileID: 855245542748809705, guid: c4b30c715a97471478287c139c8c6970,
+    type: 3}
+  mediumGold: {fileID: 93393285189898085, guid: f268ea2b70bf386409353d1ab9328783,
+    type: 3}
+  largeGold: {fileID: 5326583196382119576, guid: b3758cb9050a9484baa68c68a9b05e03,
+    type: 3}
+  boost: {fileID: 3455416214752887657, guid: 5b88322f0ba289841b3d8dd368f083b1, type: 3}
+  level: 1
+  piranhaCounter: 0
+  goldCounter: 0
+  levelTimer: 0
+  octopusTimer: 0
+  octopusPresent: 0
+  piranhaYList: feffffffffffffff0000000001000000
+  goldXList: fafffffffdffffff000000000300000006000000
+  special: 0
+  boostPresent: 0

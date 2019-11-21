@@ -3,22 +3,19 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField]    float moveSpeed = 3;
+    [SerializeField]    float moveSpeed = 30;
+    [SerializeField]    float rotateSpeed = 100;
     [SerializeField]    float swimForce = 50;
     [SerializeField]    float positionOffset = 0;
-    /*[SerializeField]    Sprite playerFull;
-    [SerializeField]    Sprite playerHit;
-    [SerializeField]    Sprite playerDead;
-    [SerializeField]    Sprite specialFull;
-    [SerializeField]    Sprite specialHit;
-    [SerializeField]    Sprite specialDead;*/
 
     Rigidbody submarine;
     GameObject gold;
     GameObject boost;
     GameSpawner gameSpawnerVariable;
-    Transform leftBoundary;
-    Transform rightBoundary;
+    Transform northBoundary;
+    Transform southBoundary;
+    Transform eastBoundary;
+    Transform westBoundary;
     public int score;
     public int tanks;
     public int lives;
@@ -33,8 +30,10 @@ public class Player : MonoBehaviour
     {
         submarine = GetComponent<Rigidbody>();
         gameSpawnerVariable = GameObject.Find("GameSpawner").GetComponent<GameSpawner>();
-        leftBoundary = GameObject.Find("LeftBoundary").transform;
-        rightBoundary = GameObject.Find("RightBoundary").transform;
+        northBoundary = GameObject.Find("North Boundary").transform;
+        southBoundary = GameObject.Find("South Boundary").transform;
+        eastBoundary = GameObject.Find("East Boundary").transform;
+        westBoundary = GameObject.Find("West Boundary").transform;
         tanks = 2;
         lives = 2;
         boostTimer = 3;
@@ -44,21 +43,37 @@ public class Player : MonoBehaviour
     {
         if (alive == true)
         {
-            transform.Translate(Input.GetAxis("Horizontal") * moveSpeed * Time.deltaTime, 0, 0);
+            if (Input.GetButton("Backward"))
+                transform.Translate(-Vector3.forward * moveSpeed * Time.deltaTime);
+            else if (Input.GetButton("Forward"))
+                transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime);
 
+            if (Input.GetButton("Left"))
+                transform.Rotate(-Vector3.up * rotateSpeed * Time.deltaTime);
+            else if (Input.GetButton("Right"))
+                transform.Rotate(Vector3.up * rotateSpeed * Time.deltaTime);
+            
             if (Input.GetKeyDown("space") || Input.GetKeyDown("w") || Input.GetKeyDown("up"))
             {
                 submarine.AddForce(Vector2.up * swimForce);
             }
         }
 
-        if (transform.position.x > rightBoundary.position.x - positionOffset - 1)
+        if (transform.position.z > northBoundary.position.z)
         {
-            transform.position = new Vector2(leftBoundary.position.x + positionOffset, transform.position.y);
+            transform.position = new Vector3(transform.position.x, transform.position.y, southBoundary.position.z);
         }
-        if (transform.position.x < leftBoundary.position.x + positionOffset)
+        if (transform.position.z < southBoundary.position.z)
         {
-            transform.position = new Vector2(rightBoundary.position.x - positionOffset - 1, transform.position.y);
+            transform.position = new Vector3(transform.position.x, transform.position.y, northBoundary.position.z);
+        }
+        if (transform.position.x > eastBoundary.position.x)
+        {
+            transform.position = new Vector3(westBoundary.position.x, transform.position.y, transform.position.z);
+        }
+        if (transform.position.x < westBoundary.position.x)
+        {
+            transform.position = new Vector3(eastBoundary.position.x, transform.position.y, transform.position.z);
         }
 
         if (boostActive == true)
