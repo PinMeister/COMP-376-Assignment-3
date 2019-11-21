@@ -5,7 +5,7 @@ using UnityEngine;
 public class Torpedo : MonoBehaviour
 {
     [SerializeField]
-    public float torpedoSpeed = 10;
+    public float torpedoSpeed = 20;
 
     Player player;
     Octopus octopus;
@@ -27,7 +27,10 @@ public class Torpedo : MonoBehaviour
 
     void Update()
     {
-        transform.Translate(transform.forward * torpedoSpeed * Time.deltaTime, Space.World);
+        if (GameObject.Find("Player").GetComponent<Player>().alive)
+        {
+            transform.Translate(transform.forward * torpedoSpeed * Time.deltaTime, Space.World);
+        }
         if (transform.position.z > northBoundary.position.z || transform.position.z < southBoundary.position.z || transform.position.x > eastBoundary.position.x || transform.position.x < westBoundary.position.x)
         {
             octopus.torpedoPresent = false;
