@@ -6,7 +6,6 @@ public class Player : MonoBehaviour
     [SerializeField]    float moveSpeed = 30;
     [SerializeField]    float rotateSpeed = 100;
     [SerializeField]    float swimForce = 50;
-    [SerializeField]    float positionOffset = 0;
     [SerializeField]    float knockback = 20;
 
     Rigidbody submarine;
@@ -53,7 +52,10 @@ public class Player : MonoBehaviour
             
             if (tanks == 1)
             {
-                oxygen = 50;
+                if (oxygen > 51)
+                {
+                    oxygen = 51;
+                }
                 totalOxygen = 50;
             }
 
@@ -212,9 +214,6 @@ public class Player : MonoBehaviour
             {
                 if (tanks == 2)
                 {
-                    Vector3 forceDirection = (transform.position - col.gameObject.transform.position).normalized * knockback;
-                    submarine.velocity = Vector3.zero;
-                    submarine.AddForce(forceDirection, ForceMode.Impulse);
                     invincibility = true;
                     tanks -= 1;
                 }

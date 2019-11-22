@@ -31,7 +31,7 @@ public class Torpedo : MonoBehaviour
         {
             transform.Translate(transform.forward * torpedoSpeed * Time.deltaTime, Space.World);
         }
-        if (transform.position.z > northBoundary.position.z || transform.position.z < southBoundary.position.z || transform.position.x > eastBoundary.position.x || transform.position.x < westBoundary.position.x)
+        if (transform.position.z > northBoundary.position.z || transform.position.z < southBoundary.position.z || transform.position.x > eastBoundary.position.x || transform.position.x < westBoundary.position.x || transform.position.y < 0)
         {
             octopus.torpedoPresent = false;
             Destroy(gameObject);
