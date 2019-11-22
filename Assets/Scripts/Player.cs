@@ -26,6 +26,8 @@ public class Player : MonoBehaviour
     bool hook = false;
     public float oxygen;
     public int totalOxygen;
+    public AudioClip pickUpGold;
+    public AudioClip depositGold;
 
     void Start()
     {
@@ -65,12 +67,6 @@ public class Player : MonoBehaviour
                 }
             }
 
-            /*if (Input.GetKey("space") && !torpedoPresent)
-            {
-                Instantiate(torpedo, transform.position + (transform.forward * 11), Quaternion.identity);
-                torpedoPresent = true;
-            }*/
-
             if (Input.GetButton("Backward"))
                 transform.Translate(-Vector3.forward * moveSpeed * Time.deltaTime);
             else if (Input.GetButton("Forward"))
@@ -81,7 +77,7 @@ public class Player : MonoBehaviour
             else if (Input.GetButton("Right"))
                 transform.Rotate(Vector3.up * rotateSpeed * Time.deltaTime);
             
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetKeyDown("space") || Input.GetMouseButtonDown(0))
             {
                 submarine.AddForce(Vector2.up * swimForce);
             }
@@ -125,6 +121,7 @@ public class Player : MonoBehaviour
 
             if (lives == 0)
             {
+                gameSpawnerVariable.level = 1;
                 score = 0;
                 lives = 2;
             }
@@ -136,6 +133,8 @@ public class Player : MonoBehaviour
     {
         if (collider.tag == "Gold" && hook == false)
         {
+            GetComponent<AudioSource>().clip = pickUpGold;
+            GetComponent<AudioSource>().Play();
             collider.transform.parent = transform;
             collider.enabled = false;
             hook = true;
@@ -163,6 +162,8 @@ public class Player : MonoBehaviour
 
         if (collider.tag == "Boat" && hook == true)
         {
+            GetComponent<AudioSource>().clip = depositGold;
+            GetComponent<AudioSource>().Play();
             if (gold.name.Contains("Small Gold"))
             {
                 score += 1;

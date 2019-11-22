@@ -4,8 +4,8 @@ MonoImporter:
   externalObjects: {}
   serializedVersion: 2
   defaultReferences:
-  - torpedo: {fileID: 1154121745365628380, guid: 2dce2ea00073f4342868880b77c0e4c7,
-      type: 3}
+  - pickUpGold: {fileID: 8300000, guid: b40f3efb239051d49ae2e9eff9077bf9, type: 3}
+  - depositGold: {fileID: 8300000, guid: 5a8b7a42a87e4f04fa9b6b77640bbac0, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

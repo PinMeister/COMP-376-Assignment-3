@@ -1,0 +1,12 @@
+fileFormatVersion: 2
+guid: b0f24df4bda11c2458a2d6855dded1db
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - underwater: {fileID: 8300000, guid: 57192566f059def49863b0a0852c6a08, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

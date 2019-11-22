@@ -60,13 +60,4 @@ public class Shark : MonoBehaviour
         }
 
     }
-
-    /*private void OnCollisionEnter(Collision col)
-    {
-        Debug.Log("Collide");
-        if (col.gameObject.tag == "Torpedo")
-        {
-            transform.Rotate(0, 180, 0);
-        }
-    }*/
 }
