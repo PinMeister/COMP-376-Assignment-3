@@ -10,10 +10,6 @@ S/Down: Move backwards
 
 A/Left and D/Right: Rotate submarine left and right respectively
 
-Space: Swim upwards
+Space/Left Click: Swim upwards
 
-Left Shift: Use boost if held (special mode only)
-
-Right Shift: Activate special mode
-
-Right Control: Return to normal mode from special mode
+Enter/Return: Restart the level
