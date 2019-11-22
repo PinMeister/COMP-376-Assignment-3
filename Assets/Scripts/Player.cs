@@ -204,16 +204,16 @@ public class Player : MonoBehaviour
                 }
             }
         }
-    }
-
-    private void OnCollisionEnter(Collision col)
-    {
-        if (col.gameObject.tag == "Torpedo" && invincibility == false)
+        
+        if (collider.tag == "Torpedo" && invincibility == false)
         {
             if (!invincibility)
             {
                 if (tanks == 2)
                 {
+                    Vector3 forceDirection = (transform.position - collider.gameObject.transform.position).normalized * knockback;
+                    submarine.velocity = Vector3.zero;
+                    submarine.AddForce(forceDirection, ForceMode.Impulse);
                     invincibility = true;
                     tanks -= 1;
                 }
@@ -225,6 +225,10 @@ public class Player : MonoBehaviour
                 }
             }
         }
+    }
+
+    private void OnCollisionEnter(Collision col)
+    {
         if (col.gameObject.tag == "Surface")
         {
             if (tanks == 2)
