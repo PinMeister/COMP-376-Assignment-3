@@ -47,8 +47,10 @@ public class Player : MonoBehaviour
     {
         if (alive == true)
         {
-
-            oxygen -= 1 * Time.deltaTime / 2;
+            if (oxygen > 1)
+            {
+                oxygen -= 1 * Time.deltaTime / 2;
+            }
             
             if (tanks == 1)
             {
@@ -66,6 +68,20 @@ public class Player : MonoBehaviour
                 {
                     invincibility = false;
                     invincibilityTimer = 0;
+                }
+            }
+
+            if (oxygen <= 1)
+            {
+                submarine.velocity = Vector3.zero;
+                submarine.AddForce(new Vector3(0, -100, 0), ForceMode.Impulse);
+                submarine.mass = 1;
+                Destroy(gold);
+                hook = false;
+                alive = false;
+                if (lives > 0)
+                {
+                    lives -= 1;
                 }
             }
 
